@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pool Chemical Analyzer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏊‍♂️ Pool Chemical Analyzer</h1>
+            <p>Professional water testing and chemical balancing recommendations</p>
+        </div>
+
+        <div class="content">
+            <form id="poolForm">
+                <div class="form-grid">
+                    <div class="form-section">
+                        <h3>Customer Information</h3>
+                        <div class="input-group">
+                            <label for="customerName">Customer Name</label>
+                            <input type="text" id="customerName" placeholder="Enter customer name">
+                        </div>
+                        <div class="input-group">
+                            <label for="customerAddress">Address</label>
+                            <textarea id="customerAddress" rows="3" placeholder="Enter customer address"></textarea>
+                        </div>
+                        <div class="customer-controls">
+                            <button type="button" class="customer-btn save-customer-btn" id="saveCustomerBtn">💾 Save Customer</button>
+                            <select id="customerSelect">
+                                <option value="">Select existing customer...</option>
+                            </select>
+                            <button type="button" class="customer-btn delete-customer-btn" id="deleteCustomerBtn">🗑️ Delete</button>
+                        </div>
+                        <div id="customerNotification" class="customer-notification"></div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Water Type</h3>
+                        <div class="water-type">
+                            <div class="radio-option">
+                                <input type="radio" id="pool" name="waterType" value="pool" checked>
+                                <label for="pool">🏊‍♂️ Pool</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="spa" name="waterType" value="spa">
+                                <label for="spa">🛁 Spa/Hot Tub</label>
+                            </div>
+                        </div>
+                        <div class="volume-guide" id="volumeGuide">
+                            Pool typical volume: 10,000 - 50,000 gallons
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Chemical Levels</h3>
+                        <div class="input-group">
+                            <label for="ph">pH Level</label>
+                            <input type="number" id="ph" min="6.0" max="8.5" step="0.1" placeholder="7.4">
+                        </div>
+                        <div class="input-group">
+                            <label for="chlorine">Free Chlorine (ppm)</label>
+                            <input type="number" id="chlorine" min="0" max="10" step="0.1" placeholder="2.0">
+                        </div>
+                        <div class="input-group">
+                            <label for="alkalinity">Total Alkalinity (ppm)</label>
+                            <input type="number" id="alkalinity" min="0" max="300" step="1" placeholder="100">
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Additional Parameters</h3>
+                        <div class="input-group">
+                            <label for="hardness">Calcium Hardness (ppm)</label>
+                            <input type="number" id="hardness" min="0" max="1000" step="1" placeholder="200">
+                        </div>
+                        <div class="input-group">
+                            <label for="cyanuric">Cyanuric Acid (ppm)</label>
+                            <input type="number" id="cyanuric" min="0" max="150" step="1" placeholder="40">
+                        </div>
+                        <div class="input-group">
+                            <label for="volume">Water Volume (gallons)</label>
+                            <input type="number" id="volume" min="100" max="100000" step="100" placeholder="20000">
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Visual Observations</h3>
+                        <div class="checkbox-grid">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="cloudy" value="cloudy">
+                                <label for="cloudy">☁️ Cloudy/Hazy Water</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="green" value="green">
+                                <label for="green">🟢 Green Tint (Algae)</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="foaming" value="foaming">
+                                <label for="foaming">🫧 Foaming</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="stains" value="stains">
+                                <label for="stains">🤎 Brown/Metallic Stains</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="scale" value="scale">
+                                <label for="scale">⚪ White Scale/Deposits</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="irritation" value="irritation">
+                                <label for="irritation">👁️ Eye/Skin Irritation</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="odor" value="odor">
+                                <label for="odor">👃 Strong Chlorine Odor</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="slippery" value="slippery">
+                                <label for="slippery">🧴 Slippery/Slimy Feel</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Test History & Reminders</h3>
+                        <div class="history-controls">
+                            <button type="button" class="history-btn" id="viewHistoryBtn">📊 View Test History</button>
+                            <button type="button" class="history-btn" id="setReminderBtn">⏰ Set Test Reminder</button>
+                        </div>
+                        <div id="nextTestReminder" class="test-reminder"></div>
+                        <div id="testHistory" class="test-history"></div>
+                    </div>
+                </div>
+
+                <button type="submit" class="analyze-btn">🧪 Analyze Water & Get Recommendations</button>
+            </form>
+
+            <div id="results" class="results"></div>
+        </div>
+    </div>
+
+    <!-- Reminder Modal -->
+    <div id="reminderModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Set Test Reminder</h3>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <label for="reminderDate">Next Test Date</label>
+                    <input type="date" id="reminderDate">
+                </div>
+                <div class="input-group">
+                    <label for="reminderType">Test Type</label>
+                    <select id="reminderType">
+                        <option value="daily">Daily Test (pH & Chlorine)</option>
+                        <option value="weekly">Weekly Test (Full Chemical Panel)</option>
+                        <option value="monthly">Monthly Test (Complete Analysis)</option>
+                        <option value="custom">Custom Test</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="reminderNotes">Notes</label>
+                    <textarea id="reminderNotes" rows="3" placeholder="Additional notes..."></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="modal-btn cancel-btn" id="cancelReminderBtn">Cancel</button>
+                <button type="button" class="modal-btn save-btn" id="saveReminderBtn">Save Reminder</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
